@@ -27,21 +27,18 @@ function loadMusic(indexNumb){
   mainAudio.src = `songs/${allMusic[indexNumb - 1].src}.mp3`;
 }
 
-//play music function
 function playMusic(){
   wrapper.classList.add("paused");
   playPauseBtn.querySelector("i").innerText = "pause";
   mainAudio.play();
 }
 
-//pause music function
 function pauseMusic(){
   wrapper.classList.remove("paused");
   playPauseBtn.querySelector("i").innerText = "play_arrow";
   mainAudio.pause();
 }
 
-//prev music function
 function prevMusic(){
   musicIndex--; //decrement of musicIndex by 1
   //if musicIndex is less than 1 then musicIndex will be the array length so the last music play
@@ -51,7 +48,6 @@ function prevMusic(){
   playingSong(); 
 }
 
-//next music function
 function nextMusic(){
   musicIndex++; //increment of musicIndex by 1
   //if musicIndex is greater than array length then musicIndex will be 1 so the first music play
@@ -60,8 +56,6 @@ function nextMusic(){
   playMusic();
   playingSong(); 
 }
-
-// play or pause button event
 playPauseBtn.addEventListener("click", ()=>{
   const isMusicPlay = wrapper.classList.contains("paused");
   //if isPlayMusic is true then call pauseMusic else call playMusic
@@ -69,17 +63,13 @@ playPauseBtn.addEventListener("click", ()=>{
   playingSong();
 });
 
-//prev music button event
 prevBtn.addEventListener("click", ()=>{
   prevMusic();
 });
-
-//next music button event
 nextBtn.addEventListener("click", ()=>{
   nextMusic();
 });
 
-// update progress bar width according to music current time
 mainAudio.addEventListener("timeupdate", (e)=>{
   const currentTime = e.target.currentTime; //getting playing song currentTime
   const duration = e.target.duration; //getting playing song total duration
@@ -107,7 +97,6 @@ mainAudio.addEventListener("timeupdate", (e)=>{
   musicCurrentTime.innerText = `${currentMin}:${currentSec}`;
 });
 
-// update playing song currentTime on according to the progress bar width
 progressArea.addEventListener("click", (e)=>{
   let progressWidth = progressArea.clientWidth; //getting width of progress bar
   let clickedOffsetX = e.offsetX; //getting offset x value
@@ -118,7 +107,6 @@ progressArea.addEventListener("click", (e)=>{
   playingSong();
 });
 
-//change loop, shuffle, repeat icon onclick
 const repeatBtn = wrapper.querySelector("#repeat-plist");
 repeatBtn.addEventListener("click", ()=>{
   let getText = repeatBtn.innerText; //getting this tag innerText
@@ -138,7 +126,6 @@ repeatBtn.addEventListener("click", ()=>{
   }
 });
 
-//code for what to do after song ended
 mainAudio.addEventListener("ended", ()=>{
   // we'll do according to the icon means if user has set icon to
   // loop song then we'll repeat the current song and will do accordingly
@@ -164,8 +151,6 @@ mainAudio.addEventListener("ended", ()=>{
       break;
   }
 });
-
-//show music list onclick of music icon
 moreMusicBtn.addEventListener("click", ()=>{
   musicList.classList.toggle("show");
 });
@@ -201,7 +186,6 @@ for (let i = 0; i < allMusic.length; i++) {
   });
 }
 
-//play particular song from the list onclick of li tag
 function playingSong(){
   const allLiTag = ulTag.querySelectorAll("li");
   
